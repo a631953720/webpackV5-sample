@@ -7,4 +7,4 @@ according to the webpack official document to write this sample
 - system Windows10
 
 # reference
-- [webpack offical document](https://webpack.js.org/guides/) (I'm very this document writing style)
+- [webpack offical document](https://webpack.js.org/guides/) (I'm very like this document writing style)

@@ -8,3 +8,7 @@ according to the webpack official document to write this sample
 
 # reference
 - [webpack offical document](https://webpack.js.org/guides/) (I'm very like this document writing style)
+
+# Queue sample
+This is a simple sample to implement the queue by Js.
+There are 2 buttons to add or delete the node in this queue.

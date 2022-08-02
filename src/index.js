@@ -1,42 +1,26 @@
 import './style.css';
 import downloadPage from './downloadPage.html';
 
-function saveCSV () {
-  // (A) ARRAY OF DATA
-  const array = [
-    ["Job", "job@doe.com", "123456"],
-    ["Joe", "joe@doe.com", "234567"],
-    ["Joi", "joi@doe.com", "345678"],
-    ["Jon", "jon@doe.com", "456789"],
-    ["Jou", "jou@doe.com", "987654"],
-    ["Joy", "joy@doe.com", "876543"],
+function saveCSV() {
+  const title = [['編號', '等級', '價格', '重量']];
+  const data = [
+    ['1', 'A', '123456', '66 72 33 56 44 37.2'],
+    ['2', 'B', '234567', '11 22 33 77 55'],
+    ['3', 'C', '345678', '77 55 66 77 12 47'],
+    ['4', 'A', '456789', '123 456 789 45'],
+    ['5', 'A', '987654', '11'],
+    ['6', 'V', '876543', '11 22 74'],
   ];
- 
-  // (B) ARRAY TO CSV STRING
-  let csv = "";
-  for (let row of array) {
-    for (let col of row) { csv += col + ","; }
-    csv += "\r\n";
-  }
- 
-  // (C) CREATE BLOB OBJECT
-  const myBlob = new Blob([csv], {type: "text/csv"});
- 
-  // (D) CREATE DOWNLOAD LINK
-  const url = window.URL.createObjectURL(myBlob);
-  const anchor = document.createElement("a");
-  anchor.href = url;
-  anchor.download = "demo.csv";
- 
-  // (E) "FORCE DOWNLOAD"
-  // NOTE: MAY NOT ALWAYS WORK DUE TO BROWSER SECURITY
-  // BETTER TO LET USERS CLICK ON THEIR OWN
-  anchor.click();
-  window.URL.revokeObjectURL(url);
-  anchor.remove();
+
+  const csvData = title.concat(data);
+  const csvContent = csvData.map((e) => e.join(',')).join('\n');
+  const link = document.createElement('a');
+  link.setAttribute('href', 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURI(csvContent));
+  link.setAttribute('download', 'test');
+  link.click();
 }
 
 document.body.innerHTML = downloadPage;
-const btn = document.getElementById("save");
+const btn = document.getElementById('save');
 
-btn.addEventListener("click", saveCSV);
+btn.addEventListener('click', saveCSV);

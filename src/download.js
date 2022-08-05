@@ -62,9 +62,11 @@ export default function saveCSV({ hideItem = '', hideIndexList = [], title = [],
   const csvData = CSVDataBuilder({ hideItem, hideIndexList, title, data });
   console.log('CSVDataBuilder', csvData);
 
-  const csvContent = csvData.map((e) => e.join(',')).join('\n');
-  const link = document.createElement('a');
-  link.setAttribute('href', 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURI(csvContent));
-  link.setAttribute('download', 'test');
-  link.click();
+  if (csvData) {
+    const csvContent = csvData.map((e) => e.join(',')).join('\n');
+    const link = document.createElement('a');
+    link.setAttribute('href', 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURI(csvContent));
+    link.setAttribute('download', 'test');
+    link.click();
+  }
 }

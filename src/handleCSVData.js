@@ -1,4 +1,5 @@
 import { sortChineseArray, checkSortedArrayEqual } from './utils';
+import { availableTitles } from "./constants/env";
 
 export function convertCSVData(csvArray) {
   console.log('convertCSVData', csvArray);
@@ -7,10 +8,6 @@ export function convertCSVData(csvArray) {
       title: [],
       items: [],
     };
-  const availableTitles = [
-    ['編號', '級別', '重量', '顆數', '品名', '單顆重量'],
-    ['編號', '售價', '重量', '顆數', '品名', '單顆重量'],
-  ];
 
   let title = [];
   // reverse array

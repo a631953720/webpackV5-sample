@@ -4,7 +4,7 @@ import downloadPage from './html/downloadPage.html';
 import saveCSV from './download';
 import showTableAndReturnParseData from './upload';
 import { convertCSVData, generateListByTitle } from './handleCSVData';
-import { defaultHideTitle } from './constants/env';
+import { defaultHideTitle, defaultDownloadFileName } from './constants/env';
 
 // https://api.jquery.com/ready/#ready-handler-handler
 $(() => {
@@ -20,22 +20,25 @@ $(() => {
     hideTitle: defaultHideTitle,
     hideIdList: [],
     isInit: false,
+    fileName: defaultDownloadFileName,
   };
 
   const uploadBtn = document.getElementById('upload');
 
   uploadBtn.addEventListener('click', async () => {
-    const parse = await showTableAndReturnParseData();
+    const { parse, fileName } = await showTableAndReturnParseData();
     const { title, items } = convertCSVData(parse);
 
     if (title.length < 1 || items.length < 1) {
       alert('轉換CSV異常');
       console.log('uploadBtn', { title, items });
     }
+    // init state
     state.CSVData = {
       title,
       items,
     };
+    if (fileName) state.fileName = fileName;
 
     console.log(generateListByTitle(title, items, '編號'));
     const idList = generateListByTitle(title, items, '編號');
@@ -81,11 +84,11 @@ $(() => {
   });
 
   $('#downloadFile').on('click', () => {
-    const { CSVData } = state;
+    const { CSVData, fileName } = state;
     const { title, items } = CSVData;
     if (title.length && items.length) {
       // 一開始設計的時候，title為一個二維陣列
-      saveCSV({ hideItem: state.hideTitle, hideIndexList: state.hideIdList, title: [title], items });
+      saveCSV({ hideItem: state.hideTitle, hideIndexList: state.hideIdList, title: [title], items, fileName });
     }
   });
 });

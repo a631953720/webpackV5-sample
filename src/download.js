@@ -1,3 +1,5 @@
+import { defaultDownloadFileName } from './constants/env';
+
 function hideTitle(hideIndex = -1, title = []) {
   if (hideIndex < 0) {
     console.error('hideIndex < 0');
@@ -58,7 +60,7 @@ function CSVDataBuilder({ hideItem = '', hideIndexList = [], title = [], items =
   }
 }
 
-export default function saveCSV({ hideItem = '', hideIndexList = [], title = [], items = [] }) {
+export default function saveCSV({ hideItem = '', hideIndexList = [], title = [], items = [], fileName = defaultDownloadFileName }) {
   const csvData = CSVDataBuilder({ hideItem, hideIndexList, title, items });
   console.log('CSVDataBuilder', csvData);
 
@@ -66,7 +68,7 @@ export default function saveCSV({ hideItem = '', hideIndexList = [], title = [],
     const csvContent = csvData.map((e) => e.join(',')).join('\n');
     const link = document.createElement('a');
     link.setAttribute('href', 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURI(csvContent));
-    link.setAttribute('download', 'test');
+    link.setAttribute('download', `${fileName}-new`);
     link.click();
   }
 }

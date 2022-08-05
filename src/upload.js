@@ -1,7 +1,8 @@
 export default function showTableAndReturnParseData() {
   return new Promise((res, rej) => {
     const fileUpload = document.getElementById('fileUpload');
-    console.log('is csv', fileUpload.files[0].name.slice(-4) === '.csv');
+    const fileName = fileUpload.files[0].name;
+    console.log('is csv', fileName.slice(-4) === '.csv');
     const parse = [];
 
     if (typeof FileReader === 'undefined') {
@@ -10,8 +11,8 @@ export default function showTableAndReturnParseData() {
       return;
     }
 
-    if (fileUpload.files[0].name.slice(-4) !== '.csv') {
-      if (fileUpload.files[0].name.slice(-5) === '.xlsx') alert('請先將.xlsx另存新檔為.csv檔案，並選擇用逗號分隔');
+    if (fileName.slice(-4) !== '.csv') {
+      if (fileName.slice(-5) === '.xlsx') alert('請先將.xlsx另存新檔為.csv檔案，並選擇用逗號分隔');
       else alert('請上傳.csv類型的檔案');
       rej('Please upload a valid CSV file.');
       return;
@@ -38,7 +39,7 @@ export default function showTableAndReturnParseData() {
       const dvCSV = document.getElementById('dvCSV');
       dvCSV.innerHTML = '';
       dvCSV.appendChild(table);
-      res(parse);
+      res({ parse, fileName: fileName.slice(0, -4) });
     };
     reader.readAsText(fileUpload.files[0]);
   });

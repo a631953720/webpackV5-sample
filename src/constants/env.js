@@ -4,3 +4,5 @@ export const availableTitles = [
 ];
 
 export const defaultHideTitle = '不刪除';
+
+export const defaultDownloadFileName = 'default';

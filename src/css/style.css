@@ -6,8 +6,8 @@
 
 @font-face {
   font-family: 'MyFont';
-  src: url('./assets/ZakirahsHand.ttf') format('truetype'),
-    url('./assets/ZakirahsHandB.ttf') format('truetype');
+  src: url('../assets/ZakirahsHand.ttf') format('truetype'),
+    url('../assets/ZakirahsHandB.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
 }

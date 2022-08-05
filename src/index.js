@@ -1,6 +1,6 @@
-import './style.css';
+import './css/style.css';
 import $ from 'jquery';
-import downloadPage from './downloadPage.html';
+import downloadPage from './html/downloadPage.html';
 import saveCSV from './download';
 import showTableAndReturnParseData from './upload';
 import { convertCSVData, generateListByTitle } from './handleCSVData';

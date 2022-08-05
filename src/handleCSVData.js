@@ -1,6 +1,7 @@
 import { sortChineseArray, checkSortedArrayEqual } from './utils';
 
-export default function convertCSVData(csvArray) {
+export function convertCSVData(csvArray) {
+  console.log('convertCSVData', csvArray);
   if (!Array.isArray(csvArray) || csvArray.length === 0)
     return {
       title: [],
@@ -39,7 +40,8 @@ export default function convertCSVData(csvArray) {
         const flag = checkSortedArrayEqual(sortedCell, sortedAvailableTitles);
         if (flag) {
           matchArrayItem = flag;
-          title = sortedCell;
+          // the title must not be sorted
+          title = element;
           break;
         }
       }
@@ -53,4 +55,23 @@ export default function convertCSVData(csvArray) {
     title,
     items: reverse.reverse(),
   };
+}
+
+export function generateListByTitle(titles, csvArray, targetTitle) {
+  console.log('listAllIdList', { csvArray, titles, targetTitle });
+  if (!Array.isArray(csvArray) || !Array.isArray(titles) || !targetTitle) return [];
+  try {
+    const list = [];
+    const findTitleIndex = titles.findIndex(title => title === targetTitle);
+    if (findTitleIndex < 0) throw new Error(`can not find the ${targetTitle}`);
+    
+    csvArray.forEach((cell) => {
+      if (cell[findTitleIndex]) list.push(cell[findTitleIndex]);
+    });
+
+    return list;
+  } catch (error) {
+    console.error('listAllIdList', error);
+    return [];
+  }
 }

@@ -1,10 +1,21 @@
-<button id="save">download test</button>
+<div>
+  <input type="file" id="fileUpload" />
+  <input type="button" id="upload" value="Upload" />
 
-<!-- <input type="file" id="uploadFile" accept=".csv" />
-<button id="upload">upload file</button> -->
+  <div style="margin-top: 20px;">
+    <div>要刪除欄位:</div>
+    <select style="height: 50px;" name="hideTitle" id="titleList">
+      <option>不刪除</option>
+    </select>
 
-<input type="file" id="fileUpload" />
-<input type="button" id="upload" value="Upload" />
+    <div>要刪除的編號列表:</div>
+    <select style="height: 200px;" name="hideIdList" multiple="multiple" id="idList">
+      <option>---</option>
+    </select>
+  </div>
 
-<hr />
-<div id="dvCSV">
+  <button id="downloadFile">下載檔案</button>
+
+  <div style="margin-top: 20px;">讀取到的檔案內容: </div>
+  <div id="dvCSV"></div>
+</div>

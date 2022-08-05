@@ -16,10 +16,18 @@ function hideItemByTitleIndex(hideIndex = -1, data = []) {
 
 function hideItemByIdList(hideList = [], data = []) {
   const newData = [];
-  data.forEach((v) => {
+  let isMatchId = false;
+  data.forEach((cell) => {
+    const id = cell[0];
+    // 例如當 id = 1 被配對到，會打開isMatchId flag
+    // 下次回圈第二個元素的第一個id欄位可以是空的
+    // 直到 id 有值為止，才會關掉flag
+    if (isMatchId && id) isMatchId = false;
     // 編號在陣列元素當中的第一個
-    const find = hideList.find((hide) => hide === v[0]);
-    if (!find) newData.push(v);
+    const find = hideList.find((hideId) => hideId === id);
+    if (find) isMatchId = true;
+
+    if (!find && !isMatchId) newData.push(cell);
   });
   return newData;
 }

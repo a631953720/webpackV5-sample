@@ -15,6 +15,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Development',
     }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
+    }),
   ],
   output: {
     filename: '[name].bundle.js',

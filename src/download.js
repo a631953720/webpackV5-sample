@@ -6,18 +6,18 @@ function hideTitle(hideIndex = -1, title = []) {
   return [title[0].filter((_, i) => i !== hideIndex)];
 }
 
-function hideItemByTitleIndex(hideIndex = -1, data = []) {
+function hideItemByTitleIndex(hideIndex = -1, items = []) {
   if (hideIndex < 0) {
     console.error('hideIndex < 0');
     return [];
   }
-  return data.map((items) => items.filter((_, i) => i !== hideIndex));
+  return items.map((item) => item.filter((_, i) => i !== hideIndex));
 }
 
-function hideItemByIdList(hideList = [], data = []) {
+function hideItemByIdList(hideList = [], items = []) {
   const newData = [];
   let isMatchId = false;
-  data.forEach((cell) => {
+  items.forEach((cell) => {
     const id = cell[0];
     // 例如當 id = 1 被配對到，會打開isMatchId flag
     // 下次回圈第二個元素的第一個id欄位可以是空的
@@ -32,10 +32,10 @@ function hideItemByIdList(hideList = [], data = []) {
   return newData;
 }
 
-function CSVDataBuilder({ hideItem = '', hideIndexList = [], title = [], data = [] }) {
+function CSVDataBuilder({ hideItem = '', hideIndexList = [], title = [], items = [] }) {
   // generate new array
   let newTitle = title.map((v) => v);
-  let newData = data.map((v) => v);
+  let newItems = items.map((v) => v);
   try {
     if (hideItem) {
       // title array only have one item
@@ -44,22 +44,22 @@ function CSVDataBuilder({ hideItem = '', hideIndexList = [], title = [], data = 
       // hide by title
       if (findTitleIndex > -1) {
         newTitle = hideTitle(findTitleIndex, newTitle);
-        newData = hideItemByTitleIndex(findTitleIndex, newData);
+        newItems = hideItemByTitleIndex(findTitleIndex, newItems);
       }
-      console.log({ newTitle, newData });
+      console.log({ newTitle, newItems });
       // hide items by id list
-      newData = hideItemByIdList(hideIndexList, newData);
-      console.log({ newTitle, newData });
+      newItems = hideItemByIdList(hideIndexList, newItems);
+      console.log({ newTitle, newItems });
     }
-    return newTitle.concat(newData);
+    return newTitle.concat(newItems);
   } catch (error) {
     console.error(error);
     return undefined;
   }
 }
 
-export default function saveCSV({ hideItem = '', hideIndexList = [], title = [], data = [] }) {
-  const csvData = CSVDataBuilder({ hideItem, hideIndexList, title, data });
+export default function saveCSV({ hideItem = '', hideIndexList = [], title = [], items = [] }) {
+  const csvData = CSVDataBuilder({ hideItem, hideIndexList, title, items });
   console.log('CSVDataBuilder', csvData);
 
   if (csvData) {

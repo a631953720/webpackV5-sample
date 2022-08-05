@@ -85,7 +85,7 @@ $(() => {
     const { title, items } = CSVData;
     if (title.length && items.length) {
       // 一開始設計的時候，title為一個二維陣列
-      saveCSV({ hideItem: state.hideTitle, hideIndexList: state.hideIdList, title: [title], data: items });
+      saveCSV({ hideItem: state.hideTitle, hideIndexList: state.hideIdList, title: [title], items });
     }
   });
 });

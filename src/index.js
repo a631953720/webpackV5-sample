@@ -19,7 +19,6 @@ $(() => {
     },
     hideTitle: defaultHideTitle,
     hideIdList: [],
-    isInit: false,
     fileName: defaultDownloadFileName,
   };
 
@@ -56,31 +55,26 @@ $(() => {
     idList.forEach((id) => {
       idSelector.innerHTML += `<option>${id}</option>`;
     });
+  });
 
-    // only init at first time after this condition
-    if (state.isInit) return;
-
-    // init selector event handler
-    $('#titleList').on('change', () => {
-      $('#titleList option:selected').each(function () {
-        // this 為觸發此function的元素
-        state.hideTitle = $(this).text();
-        console.log(state);
-      });
-    });
-
-    $('#idList').on('change', () => {
-      const selects = [];
-      $('#idList option:selected').each(function () {
-        // this 為觸發此function的元素
-        const id = $(this).text();
-        selects.push(id);
-      });
-      state.hideIdList = selects;
+  // init selector event handler
+  $('#titleList').on('change', () => {
+    $('#titleList option:selected').each(function () {
+      // this 為觸發此function的元素
+      state.hideTitle = $(this).text();
       console.log(state);
     });
+  });
 
-    state.isInit = true;
+  $('#idList').on('change', () => {
+    const selects = [];
+    $('#idList option:selected').each(function () {
+      // this 為觸發此function的元素
+      const id = $(this).text();
+      selects.push(id);
+    });
+    state.hideIdList = selects;
+    console.log(state);
   });
 
   $('#downloadFile').on('click', () => {

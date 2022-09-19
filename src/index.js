@@ -1,70 +1,43 @@
-'use strict'
-import _ from 'lodash';
+import './css/index.css'
+import 'normalize.css';
+import inputDialog from './component/dialog/example/input';
+import textDialog from './component/dialog/example/text';
+import { showErrorAlert, showSuccessAlert } from './component/alert';
 
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.next = null;
-  }
-}
+function init() {
+  const root = document.getElementById('root');
+  const dialog1 = textDialog();
+  const dialog2 = inputDialog();
 
-class Queue {
-  constructor() {
-    this.first = null;
-    this.last = null;
-    this.size = 0;
-  }
+  const textDialogBtn = document.createElement('button');
+  const inputDialogBtn = document.createElement('button');
+  const successAlertBtn = document.createElement('button');
+  const errorAlertBtn = document.createElement('button');
 
-  enqueue(value) {
-    const newNode = new Node(value);
-    if (this.size === 0) {
-      this.first = newNode;
-      this.last = newNode;
-    } else {
-      this.last.next = newNode;
-      this.last = newNode;
-    }
-    this.size = this.size + 1;
-    console.log('add', this);
-  }
-
-  dequeue() {
-    if (this.size === 0) return null;
-    const targetNode = this.first;
-    if (targetNode === this.last) this.last = null;
-    this.first = targetNode.next;
-    this.size = this.size - 1;
-    console.log('reduce', this);
-    return targetNode.value;
-  }
-
-  // search 根據放到此列隊的物件結構來實作
-  // access 同上
-}
-
-const q = new Queue();
-
-// for demo
-function component() {
-  const element = document.createElement('div');
-
-  const add = document.createElement('button');
-  add.innerHTML = 'add queue';
-  add.addEventListener('click', () => {
-    q.enqueue(123);
+  textDialogBtn.innerHTML = '打開文字Dialog';
+  textDialogBtn.addEventListener('click', () => {
+    dialog1.render();
   });
+  root.appendChild(textDialogBtn);
 
-  const reduce = document.createElement('button');
-  reduce.innerHTML = 'reduce queue';
-  reduce.addEventListener('click', () => {
-    q.dequeue();
+  inputDialogBtn.innerHTML = '打開有input元素的dialog';
+  inputDialogBtn.addEventListener('click', () => {
+    dialog2.render();
   });
+  root.appendChild(inputDialogBtn);
 
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.appendChild(add);
-  element.appendChild(reduce);
+  successAlertBtn.innerHTML = '打開 success alert';
+  successAlertBtn.addEventListener('click', () => {
+    showSuccessAlert('123');
+  });
+  root.appendChild(successAlertBtn);
 
-  return element;
+  errorAlertBtn.innerHTML = '打開 error alert';
+  errorAlertBtn.addEventListener('click', () => {
+    showErrorAlert('456');
+  });
+  root.appendChild(errorAlertBtn);
 }
-
-document.body.appendChild(component());
+window.onload = () => {
+  init();
+};

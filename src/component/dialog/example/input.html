@@ -1,0 +1,38 @@
+<form class="scheduler-form" id="scheduler-form">
+  <div>
+    <label>
+      <span>選單: </span>
+      <select name="schedulerType">
+        <option value="daily">daily</option>
+        <option value="weekly">weekly</option>
+        <option value="monthly">monthly</option>
+      </select>
+    </label>
+  </div>
+  <div>
+    <label>
+      <span>開始時間: </span>
+      <input type="time" name="startTime">
+    </label>
+  </div>
+  <div>
+    <label>
+      <span>結束時間: </span>
+      <input type="time" name="endTime">
+    </label>
+  </div>
+  <div>
+    <span>開關: </span>
+    <input type="radio" id="on" name="CMD" value="ON" checked>
+    <label for="on">開</label>
+
+    <input type="radio" id="off" name="CMD" value="OFF">
+    <label for="off">關</label>
+  </div>
+  <div>
+    <label>
+      <span>是否啟動排程: </span>
+      <input type="checkbox" name="status" checked>
+    </label>
+  </div>
+</form>

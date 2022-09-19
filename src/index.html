@@ -1,12 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
-  123
+  <div id="root"></div>
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="lds-ring all-page">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div id="dialog-overlay" class="dialog-overlay">
+    <div id="dialog-wrapper" class="dialog-wrapper">
+      <div id="dialog-title" class="dialog-title">title</div>
+      <div id="dialog-content" class="dialog-content"></div>
+      <div id="dialog-control" class="dialog-control">
+        <span id="dialog-cancel" class="btn" style="margin-right: 16px;">取消</span>
+        <span id="dialog-ok" class="btn">確定</span>
+      </div>
+    </div>
+  </div>
+  <div id="page-alert" class="page-alert"></div>
 </body>
+
 </html>

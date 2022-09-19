@@ -1,0 +1,113 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.dialog-overlay,
+.loading-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: none;
+  z-index: 10000;
+}
+
+/* dialog */
+
+.dialog-wrapper {
+  min-width: 500px;
+  min-height: 500px;
+  max-width: 80%;
+  background: rgba(255, 255, 255, 0.8);
+  max-height: 60%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border-radius: 25px;
+  padding: 25px;
+}
+
+.dialog-title {
+  width: 100%;
+  height: 60px;
+  margin-bottom: 10px;
+  font-size: 32px;
+}
+
+.dialog-content {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  margin-bottom: 10px;
+}
+
+.dialog-control {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+}
+
+/* common button style */
+
+.btn {
+  width: 90px;
+  display: inline-block;
+  cursor: pointer;
+  background-color: rgba(0,0,0,0.12);
+  border-radius: 10px;
+  padding: 4px;
+  text-align: center;
+  user-select: none;
+}
+
+.btn:hover {
+  background-color: rgba(0,0,0,0.24);
+  border-radius: 10px;
+}
+
+.btn:active {
+  background-color: rgba(0,0,0,0.06);
+  border-radius: 10px;
+}
+
+/* page alert */
+.page-alert {
+  position: fixed;
+  width: 90%;
+  height: 40px;
+  border-radius: 10px;
+  top: 0;
+  left: 5%;
+  text-align: center;
+  opacity: 0;
+  line-height: 40px;
+  transition: all .75s, z-index 0s;
+  z-index: -10000;
+}
+
+.page-alert.show {
+  top: 60px;
+  opacity: 1;
+  z-index: 10001;
+}
+
+.page-alert.error {
+  background-color: rgb(236, 75, 75);
+}
+
+.page-alert.success {
+  background-color: rgb(83, 207, 83);
+}

@@ -10,7 +10,9 @@ function trGenerator(index, dataKeyList = [], element) {
     const v = element[dataKey] !== null ? element[dataKey] : "";
     // 有設定檔來決定說是否為json格式
     if (map && map[dataKey]) {
-      html += `<td data-idx="${index}" data-key="${dataKey}" data-type="json">${prettier(v)}</td>`;
+      // html += `<td><pre class="pretty-json" data-idx="${index}" data-key="${dataKey}" data-type="json">${prettier(v)}</pre></td>`;
+      // 因為click 的 target 會在pre元素上，所以把屬性都掛在上面
+      html += `<td><pre class="pretty-json" data-idx="${index}" data-key="${dataKey}" data-type="json">${prettier(v)}</pre></td>`;
     } else {
       html += `<td data-idx="${index}" data-key="${dataKey}">${prettier(v)}</td>`;
     }
@@ -47,7 +49,6 @@ function tdOnClick(e, dataName) {
     // const target = e.target;
     console.log(target, dataName, target.dataset.idx);
     const data = getGlobalVariable(dataName)[target.dataset.idx];
-
     const newData = convertData({
       origin: data[target.dataset.key],
       newData: e.target.value,

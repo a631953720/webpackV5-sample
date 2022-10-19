@@ -16,7 +16,7 @@ function init() {
   const jsonFile = document.querySelector("#json-file");
   jsonFile.onchange = (e) => {
     const file = e.target.files[0];
-    const name = file.name.split(".json")[0].toLowerCase();
+    const name = file.name.split(".json")[0];
     console.log(`file name: ${name}`);
 
     if (!allowFiles[name]) {

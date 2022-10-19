@@ -8,8 +8,8 @@ const initState = {
 };
 
 export const fileNameMap = {
-  data: "data",
-  widget: "widget"
+  data: "Data",
+  widget: "Widget"
 };
 
 export const allowFiles = {

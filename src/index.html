@@ -1,12 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
-  123
+  <div id="root">
+    <div>
+      可處理的檔案:
+      <li>Data.json</li>
+      <li>Widget.json</li>
+    </div>
+    <hr>
+    <label for="json-file">File to upload</label>
+    <input type="file" id="json-file" accept=".json">
+    <button id="json-upload">upload</button>
+    <button id="json-save">save</button>
+    <hr>
+    <div id="data-table-wrapper" style="display: none;">
+      <table id="data-table">
+        <caption>
+          <h2>data table</h2>
+        </caption>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>DeletedFlag</th>
+            <th>Name</th>
+            <th>GroupId</th>
+            <th>Location</th>
+            <th>Numberical</th>
+            <th>Unit</th>
+            <th>Dynamic</th>
+            <th>EventMessage</th>
+            <th>Icon</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="widget-table-wrapper" style="display: none;">
+      <div>Tips
+        <ul>
+          <li>Data Id 對照表: <a href="https://www.notion.so/itd/Data-Id-map-2d0739c1776f4d8d80b7afb86c550166">notion
+              對照表</a></li>
+          <li>ChartId 對照表(只列出可能用的):</li>
+          <ul>
+            <li>1: bar</li>
+            <li>2: doughnut</li>
+            <li>6: pie</li>
+            <li>8: text</li>
+          </ul>
+        </ul>
+      </div>
+      <table id="widget-table">
+        <caption>
+          <h2>widget table</h2>
+        </caption>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>DataId</th>
+            <th>DeletedFlag</th>
+            <th>Width</th>
+            <th>Name</th>
+            <th>SettingStr</th>
+            <th>ChartId</th>
+            <th>IsThreshold</th>
+            <th>ResendTime</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="./index.js"></script>
 </body>
+
 </html>

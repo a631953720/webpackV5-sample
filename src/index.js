@@ -1,3 +1,4 @@
+import './index.css';
 import { allowFiles, fileNameMap, getGlobalVariable, setGlobalVariable } from "./state";
 import { download, initAllPage } from './utils';
 import { generateDataSchemaTable, generateWidgetSchemaTable } from './generator';

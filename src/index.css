@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+.table-wrapper table {
+  width: 100%;
+  text-align: center;
+  border-collapse:collapse;
+	border-spacing: 0;
+  margin: 20px auto;
+}
+
+.table-wrapper td textarea {
+	width: 100%;
+  height: 200px;
+}
+
+.table-wrapper .pretty-json {
+  padding: 0px 16px;
+}
+
+.table-wrapper pre {
+  text-align: left;
+}
+
+.table-wrapper table, th, td {
+  border: 1px solid black;
+}

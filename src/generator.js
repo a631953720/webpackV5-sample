@@ -12,7 +12,7 @@ function trGenerator(index, dataKeyList = [], element) {
     if (map && map[dataKey]) {
       // html += `<td><pre class="pretty-json" data-idx="${index}" data-key="${dataKey}" data-type="json">${prettier(v)}</pre></td>`;
       // 因為click 的 target 會在pre元素上，所以把屬性都掛在上面
-      html += `<td><pre class="pretty-json" data-idx="${index}" data-key="${dataKey}" data-type="json">${prettier(v)}</pre></td>`;
+      html += `<td class="pretty-json"><pre data-idx="${index}" data-key="${dataKey}" data-type="json">${prettier(v)}</pre></td>`;
     } else {
       html += `<td data-idx="${index}" data-key="${dataKey}">${prettier(v)}</td>`;
     }
@@ -31,7 +31,6 @@ function tdOnClick(e, dataName) {
   if (target.dataset.type === "json") {
     input = document.createElement("textarea");
     input.value = prettier(data[target.dataset.key]);
-    input.style = "width: 300px; height: 200px";
   } else {
     input = document.createElement("input");
     input.type = "text";

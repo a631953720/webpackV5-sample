@@ -1,16 +1,19 @@
 import './index.css';
 import { allowFiles, fileNameMap, getGlobalVariable, setGlobalVariable } from "./state";
 import { download, initAllPage } from './utils';
-import { generateDataSchemaTable, generateWidgetSchemaTable } from './generator';
+import { generateDataSchemaTable, generateWidgetSchemaTable, generateDynamicSchemaTable } from './generator';
 
 // constants
 const fileHandleMap = {
   [fileNameMap.data]: generateDataSchemaTable,
   [fileNameMap.widget]: generateWidgetSchemaTable,
+  [fileNameMap.widgetBranchList]: generateDynamicSchemaTable,
 };
+
 const fileDataMap = {
   [fileNameMap.data]: () => getGlobalVariable("dataSchema"),
   [fileNameMap.widget]: () => getGlobalVariable("widgetSchema"),
+  [fileNameMap.widgetBranchList]: () => getGlobalVariable("dynamicSchema"),
 };
 
 function init() {

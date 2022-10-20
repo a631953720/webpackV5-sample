@@ -1,6 +1,16 @@
 import { getGlobalVariable, setGlobalVariable, jsonTypeHeaderMap } from "./state";
 import { convertData, prettier, reversePrettier } from './utils';
 
+function theadThGenerator(dataKeyList = []) {
+  let html = "";
+
+  dataKeyList.forEach((dataKey) => {
+    html += `<th>${dataKey}</th>`;
+  });
+
+  return html;
+}
+
 function trGenerator(index, dataKeyList = [], element) {
   const fileName = getGlobalVariable("currentFileName");
   const map = jsonTypeHeaderMap[fileName];
@@ -69,12 +79,20 @@ function tdOnClick(e, dataName) {
   };
 }
 
+/**
+ * 描述
+ * @date 2022-10-20
+ * @param {HTMLElement} wrapper
+ * @param {HTMLTableElement} tableEl
+ * @param {string} dataName
+ * @returns {void}
+ */
 function onFileLoad(wrapper, tableEl, dataName) {
   // const wrapper = document.getElementById("widget-table-wrapper");
   const jsonFile = document.querySelector("#json-file");
   // const widgetTable = document.getElementById("widget-table");
   const tbody = tableEl.getElementsByTagName("tbody")[0];
-
+  console.log(tbody);
   if (!jsonFile.value.length) return;
 
   const reader = new FileReader();
@@ -83,11 +101,24 @@ function onFileLoad(wrapper, tableEl, dataName) {
     const str = e.target.result;
     const schema = JSON.parse(str);
     setGlobalVariable(dataName, schema);
-
+    console.log(schema);
     for (let i = 0; i < schema.length; i++) {
       const tr = document.createElement("tr");
       const element = schema[i];
       const keyList = Object.keys(element);
+
+      if (i === 0 && dataName === "dynamic") {
+        // title
+        const title = tableEl.getElementsByTagName("caption")[0];
+        title.innerHTML = `<h2>${dataName}</h2>`;
+
+        // thead
+        const thead = tableEl.getElementsByTagName("thead")[0];
+        const theadTR = document.createElement("tr");
+        theadTR.innerHTML = theadThGenerator(keyList)
+        thead.innerHTML = "";
+        thead.appendChild(theadTR);
+      }
 
       tr.innerHTML = trGenerator(i, keyList, element);
 
@@ -118,4 +149,10 @@ export function generateWidgetSchemaTable() {
   const wrapper = document.getElementById("widget-table-wrapper");
   const widgetTable = document.getElementById("widget-table");
   onFileLoad(wrapper, widgetTable, "widgetSchema");
+}
+
+export function generateDynamicSchemaTable() {
+  const wrapper = document.getElementById("dynamic-table-wrapper");
+  const table = wrapper.getElementsByTagName("table")[0];
+  onFileLoad(wrapper, table, "dynamic");
 }

@@ -38,7 +38,7 @@ export function reversePrettier(data) {
 
 export function initAllPage() {
   const wrapper = document.getElementsByClassName("table-wrapper");
-
+  console.log(wrapper);
   Array.from(wrapper).forEach((element) => {
     const tbody = element.getElementsByTagName("tbody")[0];
     tbody.innerHTML = "";

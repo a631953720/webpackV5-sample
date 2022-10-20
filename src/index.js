@@ -23,10 +23,10 @@ function init() {
     const name = file.name.split(".json")[0];
     console.log(`file name: ${name}`);
 
-    if (!allowFiles[name]) {
-      alert("不支援的檔案");
-      return;
-    }
+    // if (!allowFiles[name]) {
+    //   alert("不支援的檔案");
+    //   return;
+    // }
 
     setGlobalVariable("currentFileName", name);
   };
@@ -35,11 +35,12 @@ function init() {
   uploadBtn.onclick = () => {
     const fileName = getGlobalVariable("currentFileName");
 
+    initAllPage();
     if (typeof fileHandleMap[fileName] === "function") {
-      initAllPage();
       return fileHandleMap[fileName]();
     } else {
-      alert("找不到對應的處理");
+      generateDynamicSchemaTable()
+      // alert("找不到對應的處理");
     }
   };
 
@@ -48,14 +49,17 @@ function init() {
     const fileName = getGlobalVariable("currentFileName");
 
     if (typeof fileDataMap[fileName] !== "function") {
-      alert("找不到對應的資料");
-      return;
+      // alert("找不到對應的資料");
+      download(
+        JSON.stringify(getGlobalVariable("dynamicSchema"), null, 2),
+        `${fileName}.json`
+      );
+    } else {
+      download(
+        JSON.stringify(fileDataMap[fileName](), null, 2),
+        `${fileName}.json`
+      );
     }
-
-    download(
-      JSON.stringify(fileDataMap[fileName](), null, 2),
-      `${fileName}.json`
-    );
   };
 }
 
